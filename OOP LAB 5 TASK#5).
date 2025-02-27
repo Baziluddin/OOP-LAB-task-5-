@@ -1,0 +1,145 @@
+// 24k-0559 Bazil-Uddin-Khan 
+
+#include <iostream>
+using namespace std;
+
+class TourGuide
+{
+    private:
+    string Name;
+    int YearsOfExperience;
+    string Specialization;
+    
+    public:
+    TourGuide()
+    {
+        Name= " ";
+        YearsOfExperience = 0;
+        Specialization = " ";
+    }
+    
+    TourGuide(string name, int yearexperience,string specialization)
+    {
+        Name = name;
+        YearsOfExperience = yearexperience;
+        Specialization = specialization;
+        
+    }
+    
+    string GetName()
+    {
+        return Name;
+    }
+    
+    string GetSpecialization()
+    {
+        return Specialization;
+    }
+    
+    int TotalYears()
+    {
+        return YearsOfExperience;
+    }
+    
+    void DisplayInfo()
+    {
+        cout << " Tour Guide  Name Is " << Name << endl;
+        cout << "  Tour Guide Is Specialized In  " << Specialization << endl;
+        cout << " Tour Guide has " << YearsOfExperience << " years of Experience " << endl;
+        
+    }
+    
+    void InitializeDetails(string Name,int YearsOfExperience,string Specialization)
+    {
+        this->Name = Name;
+        this->YearsOfExperience = YearsOfExperience;
+        this->Specialization = Specialization;
+    }
+};
+
+
+class TravelAgency
+{
+    private:
+    TourGuide * tourguide = nullptr;
+    string AgencyName;
+    long AgencyContactNo;
+    
+    public:
+    TravelAgency(int TotalGuides,string AgencyName, long AgencyContactNo)
+    {
+        if(tourguide == nullptr)
+        {
+            tourguide = new TourGuide[TotalGuides];
+           this->AgencyName = AgencyName;
+           this->AgencyContactNo = AgencyContactNo;
+        }
+    }
+    
+    TravelAgency(string Agencyname,double agencycontactno)
+    {
+        AgencyName = Agencyname;
+        AgencyContactNo = agencycontactno;
+    }
+    
+    void DisplayDetails(int TotalElements)
+    {
+        cout << " Travel Agency Deatils is " << endl;
+        
+        
+        
+        cout << " Travel Agency Name Is " << AgencyName << " Ttavel Agency Contact No is " << AgencyContactNo << endl;
+        
+        cout << " Travel Guide  Details are that are been hired " << endl;
+        
+        string Travelguidename;
+        int Yearsexperience;
+        string specialization;
+        
+        cin.ignore();
+        for(int i = 0; i < TotalElements;i++)
+        {
+            
+            
+            cout << " Travel Guide  Name is " << endl;
+            
+            getline(cin,Travelguidename);
+            
+            cout << " Travel Guide Specialization is " << endl;
+            
+            getline(cin,specialization);
+            
+            cout << " Enter Travel Guide Total Experience " << endl;
+            cin >> Yearsexperience;
+            cin.ignore();
+
+            tourguide[i].InitializeDetails(Travelguidename,Yearsexperience,specialization);
+        }
+        
+        for(int i = 0; i < TotalElements;i++)
+        {
+            tourguide[i].DisplayInfo();
+        }
+    }
+    
+    
+    ~TravelAgency()
+    {
+       delete[] tourguide;
+       
+    }
+};
+int main()
+{
+    
+    cout << " Welcome To Travel Agency " << endl;
+    
+    int Totalelements;
+    cout << " Enter TotalGuides of Agency " << endl;
+    cin >> Totalelements;
+    
+    TravelAgency travel(Totalelements,"Tcs",9287654321);
+    travel.DisplayDetails(Totalelements);
+
+    return 0;
+}
