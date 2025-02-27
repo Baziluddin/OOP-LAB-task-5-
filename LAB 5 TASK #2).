@@ -1,0 +1,117 @@
+// 24k-0559 bazil-uddin-khan
+#include<iostream>
+using namespace std;
+
+class Patient
+{
+    private:
+    string Uniqueid;
+    string Uniquename;
+    int * Results;
+    int Totalelement;
+
+    public:
+    Patient()
+    {
+        Uniqueid = " ";
+        Uniquename = " ";
+        Results = nullptr;
+        Totalelement =0;
+
+    }
+    Patient(string uniqueid, string unquename, int totalelement)
+    {
+        Totalelement = totalelement;
+        
+        Results = new int[Totalelement];
+        for(int i =0; i <Totalelement ;i++)
+            {
+                    int result;
+                   cout << " enter test  results "<<endl;
+                   cin >> result;
+                   Results[i]= result;
+
+            }
+        
+        Uniqueid = uniqueid;
+        Uniquename = unquename;
+
+    }
+
+    Patient(const Patient & pateint)
+    {
+        Uniqueid = pateint.Uniqueid;
+        Uniquename  = pateint.Uniquename;
+        Totalelement = pateint.Totalelement;
+        Results = new int[Totalelement];
+        for(int i = 0; i < Totalelement;i++)
+        {
+             Results[i] =pateint.Results[i];
+        }
+
+
+    }
+
+    void setid(string newid )
+    {
+        Uniqueid = newid;
+
+
+    }
+
+    void update()
+    {
+        string newid;
+        cout << " enter new id " << endl;
+        cin >> newid;
+        setid(newid);
+
+    }
+
+    void display()
+    {
+        cout << " patient name is " << Uniqueid << endl;;
+        cout << " unique name is " << Uniquename << endl;
+        for(int i =0 ; i < Totalelement;i++)
+        {
+            cout << Results[i] << endl;
+
+        }
+    }
+    
+    ~Patient() 
+    {
+        delete[] Results;
+    }
+
+};
+
+int main()
+{
+    int totalelement;
+    cout << " enter total elements " << endl;
+    cin >> totalelement;
+
+    Patient patient("123","patiney",totalelement);
+    cout << "Original paytient  details  " << endl;
+    
+    patient.display();
+    
+    Patient patient2 = patient;
+    
+   
+    cout << " Updating Copy Patients  " << endl;
+    
+    patient2.update();
+    
+    cout << " Original patient Details  After Copy "  << endl;
+    
+    patient.display();
+
+    
+    cout << " Copied patient details  after update " << endl;
+    patient2.display();
+   
+
+ 
+}
