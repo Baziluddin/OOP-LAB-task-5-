@@ -1,0 +1,133 @@
+// 24k-0559 Bazil-Uddin-Khan
+
+#include <iostream>
+using namespace std;
+
+class Movie
+{
+    string Title;
+    string Director;
+    double Duration;
+    
+    public:
+    Movie()
+    {
+        Title = " ";
+         Director = " " ;
+         Duration = 0;
+    }
+
+     Movie(string Title,string Director,int Duration)
+    {
+        this->Title = Title;
+         this->Director =  Director;
+         this->Duration = Duration;
+    }
+
+      void SetAttributes()
+      {
+               string title;
+               cout << " Enter Title " << endl;
+               cin >> title;
+               Title = title;
+               string director;
+                cout << " Enter Director " << endl;
+               cin >> director;
+               Director = director;
+ 
+               int duration;
+                cout << " Enter Duration Of Movie  " << endl;
+               cin >> duration;
+               Duration = duration;
+
+
+  
+      }
+
+    
+     void MovieDetails()
+     {
+
+
+      cout << " Title is " << Title <<  " Director is " << Director << " Duration is " << Duration << endl;
+   
+     }
+ 
+    string GetDirector()
+     {
+
+              return Director;
+     }
+    string GetTitle()
+    {
+
+              return Title;
+    }
+
+    int GetDuration()
+    {
+      return Duration;
+
+    }
+    
+};
+
+class Cinema
+{
+private:
+       string CinemaName;
+       Movie * movie = nullptr;
+ public:
+       Cinema()
+       {
+          CinemaName = " ";
+       }
+
+       Cinema(string CinemaName,int TotalMovies)
+       {
+         this->CinemaName = CinemaName;
+         movie = new Movie[TotalMovies];
+
+       }
+
+
+      void AddMovieinCinema(int TotalMovies)
+      {
+           for(int i =0; i < TotalMovies;i++)
+
+           {
+                  movie[i].SetAttributes();
+            }
+
+        }
+    
+        void DisplayCinemasMovie(int TotalMovies)
+        {
+             cout << " Cinema Name Is " << CinemaName << endl;
+             for(int i =0; i < TotalMovies;i++)
+             {
+                 cout << " Cinema " << i+1 << " Movie Title  is " << movie[i].GetTitle() << " Movie Director is " << movie[i].GetDirector() << " Movies Duration is " << movie[i].GetDuration() << endl;
+              }
+
+        }
+        ~Cinema()
+        {
+            delete [] movie;
+        }
+
+};
+
+int main()
+{
+    int TotalMovies;
+    cout << " Enter Total Movies In Cinema " << endl;
+    cin >> TotalMovies;
+      string CinemaName;
+      cout << " Enter Cinema Name is " << endl;
+      cin >> CinemaName;
+     Cinema cinema(CinemaName,TotalMovies);
+    cinema.AddMovieinCinema(TotalMovies);
+    cinema.DisplayCinemasMovie(TotalMovies);
+
+    return 0;
+}
