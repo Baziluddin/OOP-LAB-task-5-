@@ -1,0 +1,130 @@
+// 24k-0559 Bazil-Uddin-Khan 
+
+#include <iostream>
+using namespace std;
+
+class Proffessor
+{
+    private:
+    string ProffesorName;
+    string ProffesorDepartment;
+    
+    public:
+    Proffessor()
+    {
+        ProffesorName= " ";
+        ProffesorDepartment = " ";
+    }
+    
+    Proffessor(string ProffesorName,string ProffesorDepartment)
+    {
+        this->ProffesorName = ProffesorName;
+        this->ProffesorDepartment = ProffesorDepartment;
+    }
+    
+    string GetName()
+    {
+        return ProffesorName;
+    }
+    
+    string GetDepartment()
+    {
+        return ProffesorDepartment;
+    }
+    
+    void DisplayInfo()
+    {
+        cout << " Proffesor Name Is " << ProffesorName << endl;
+        cout << " Professor Department Is " << ProffesorDepartment << endl;
+        
+    }
+    
+    void InitializeDetails(string ProffessorName, string Proffesordepartment)
+    {
+        ProffesorName = ProffessorName;
+        ProffesorDepartment = Proffesordepartment;
+    }
+};
+
+
+class University
+{
+    private:
+    Proffessor * proffesor= nullptr;
+    string UniversityName;
+    string UniversityId;
+    
+    public:
+    University(int TotalProffessors,string UniversityName, string UniversityId)
+    {
+        if(proffesor == nullptr)
+        {
+            proffesor = new Proffessor[TotalProffessors];
+           this->UniversityName = UniversityName;
+           this->UniversityId = UniversityId;
+            
+        }
+        
+    }
+    
+    University(string Uniname,string Uniid) : UniversityName(Uniname),UniversityId(Uniid)
+    {}
+    
+    void DisplayUniversityDetails(int TotalElements)
+    {
+        cout << " University Deatils is " << endl;
+        
+        
+        
+        cout << " University Name Is " << UniversityName << " University Id is " << UniversityId << endl;
+        
+        cout << " Proffesor Details are " << endl;
+        
+        string professname;
+        string proffesordepart;
+        
+        cin.ignore();
+        for(int i = 0; i < TotalElements;i++)
+        {
+            
+            
+            cout << " Proffesor Name is " << endl;
+            
+            getline(cin,professname);
+            
+            cout << " Proffessor department is " << endl;
+            
+            getline(cin,proffesordepart);
+            
+            
+            proffesor[i].InitializeDetails(professname,proffesordepart);
+        }
+        
+        for(int i = 0; i < TotalElements;i++)
+        {
+            proffesor[i].DisplayInfo();
+        }
+    }
+    
+    
+    ~University()
+    {
+       delete[] proffesor;
+       
+    }
+};
+
+int main()
+{
+    
+    cout << " Welcome To Fast Management System " << endl;
+    
+    int Totalelements;
+    cout << " Enter Total Proffessors " << endl;
+    cin >> Totalelements;
+    
+    University uni(Totalelements,"Fast","Fastzx");
+    uni.DisplayUniversityDetails(Totalelements);
+
+    return 0;
+}
