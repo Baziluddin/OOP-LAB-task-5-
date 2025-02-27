@@ -1,0 +1,141 @@
+// Bazil uddin Khan 24k-0559
+
+#include <iostream>
+using namespace std;
+
+class Battery
+{
+    private:
+    double Capacity;
+    const string BatteryType ;
+    
+    public:
+    Battery() : BatteryType("NonRemovableBattery")
+    {
+        Capacity = 0;
+        
+    }
+    
+    Battery(double capacity) : Capacity(capacity), BatteryType("NonRemovableBattery")
+    { }
+    
+    void SetCapacity(double Capacity)
+    {
+        this->Capacity = Capacity;
+    }
+    
+    void DisplayBatteryinfo()
+    {
+        cout << " Battery Capacity is " << Capacity << " Battery 🔋 Type is " << BatteryType << endl;
+    }
+    
+};
+
+
+class SmartPhone
+{
+    private:
+    Battery battery;
+    string SmartPhoneName;
+    double SmartPhonePrice;
+    string SmartPhoneCompany;
+    
+    public:
+    SmartPhone()
+    {
+        SmartPhoneName = " ";
+        SmartPhonePrice = 0.0;
+        SmartPhoneCompany = " ";
+    }
+    
+    void SetName(string name)
+    {
+        SmartPhoneName = name;
+    }
+    
+    void SetPrice(double price)
+    {
+        SmartPhonePrice = price;
+    }
+    
+    void SetCompany(string company)
+    {
+        SmartPhoneCompany = company;
+    }
+    
+    
+    void Initialize(SmartPhone * smartphone,int Totalphone)
+    {
+        string Smartphonename;
+        double smartphoneprice;
+        string  smartphonecompany;
+        
+       
+        for(int i =0; i < Totalphone;i++)
+         {
+            
+           cout << " Enter Smart Phone Name " << endl;
+            cin >> Smartphonename;
+            smartphone[i].SetName(Smartphonename);
+            
+           cout << " Enter Smart Phone Price " << endl;
+           cin >> smartphoneprice;
+           smartphone[i].SetPrice(smartphoneprice);
+        
+        
+           cout << " Enter Smart Phone Company  " << endl;
+           cin >> smartphonecompany;
+           smartphone[i].SetCompany(smartphonecompany);
+           
+        
+          double Capacity;
+           cout << " Enter Capacity " << endl;
+          cin >> Capacity;
+        
+         battery.SetCapacity(Capacity);
+       }
+             
+         }
+      
+    
+    string GetName()
+    {
+        return SmartPhoneName;
+    }
+    double GetPrice()
+    {
+        return SmartPhonePrice;
+    }
+    string GetCompany()
+    {
+        return SmartPhoneCompany;
+    }
+    
+    void Display(SmartPhone * smartphone,int Totalphones)
+    {
+        for(int i =0; i < Totalphones;i++)
+        {
+            cout << " Smart Phone Name is " << smartphone[i].GetName() << " Smart phone Price is " << smartphone[i].GetPrice() << " Smart Phone Company is  " << smartphone[i].GetCompany() << endl;
+            
+        }
+        battery.DisplayBatteryinfo();
+        
+    }
+    
+    
+};
+
+int main() 
+{
+    int Totalphone;
+    cout << " Enter Total phone " << endl;
+    cin >> Totalphone;
+    SmartPhone * smartphone = new SmartPhone[Totalphone];
+    smartphone->Initialize(smartphone,Totalphone);
+    
+    smartphone->Display(smartphone,Totalphone);
+    
+    delete [] smartphone;
+
+    return 0;
+}
