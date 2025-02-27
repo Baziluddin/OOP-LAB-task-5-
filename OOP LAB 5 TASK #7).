@@ -1,0 +1,197 @@
+//24k-0559 Bazil-Uddin-Khan
+
+#include <iostream>
+using namespace std;
+
+class Product
+{
+    string UniqueName;
+    string ProductId;
+    double Price;
+    
+    public:
+    Product()
+    {
+          UniqueName = " ";
+          ProductId    = " " ;
+          Price = 0;
+    }
+
+    Product(string UniqueName,string ProductId ,double Price)
+    {
+        this->UniqueName = UniqueName;
+         this->Price =  Price;
+         this->ProductId = ProductId;
+    }
+
+      void SetAttributes()
+      {
+               string uniquename;
+               cout << " Enter Name of Product  " << endl;
+               cin >> uniquename;
+               UniqueName  = uniquename;
+               string productid;
+                cout << " Enter Product id " << endl;
+               cin >> productid;
+               ProductId = productid;
+ 
+               double price;
+               cout << " Enter Price Of Product  " << endl;
+               cin >> price;
+               Price = price;
+  
+      }
+      
+      
+      void SetName(string name)
+      {
+          UniqueName = name;
+      }
+      
+      
+      void SetPrice(double price)
+      {
+          Price = price;
+      }
+    
+      
+      void SetId(string id)
+      {   
+          ProductId = id;
+          
+      }
+     void ProductDetails()
+     {
+
+
+      cout << " Product Name is " << UniqueName <<  " Product id is  " << ProductId  << " Price is  is " << Price <<  endl;
+   
+     }
+ 
+    string GetName()
+    {
+
+              return UniqueName;
+    }
+    double GetPrice()
+    {
+
+              return Price;
+    }
+
+    string GetId()
+    {
+      return ProductId;
+
+     }
+    
+};
+
+class Inventory
+{
+private:
+       string InventoryName;
+       Product * product = nullptr;
+ public:
+       Inventory()
+       {
+           InventoryName = " ";
+       }
+
+       Inventory(string InventoryName,int Totalproducts)
+       {
+         this->InventoryName = InventoryName;
+         product = new Product[Totalproducts];
+       }
+
+
+
+      void AddProductinInventory(int Totalproducts)
+      {
+           for(int i =0; i < Totalproducts ;i++)
+
+           {
+                product[i].SetAttributes();
+            }
+
+        }
+        
+        void DisplayProduct(int i)
+        {
+             
+
+           cout << " Product  " << i+1 << " Product Name  is " << product[i].GetName() << " Product id " << product[i].GetId() << " Price is  " << product[i].GetPrice() << endl;
+ 
+
+        }
+        
+        void Sort(int Totalproducts)
+        {
+          for (int i = 0; i < Totalproducts - 1; i++)
+            {
+               for (int j = 0; j < Totalproducts - i - 1; j++)
+                {
+                  if (product[j].GetPrice() > product[j + 1].GetPrice())
+                  {
+                
+                    Product temp = product[j];
+                    product[j] = product[j + 1];
+                    product[j + 1] = temp;
+                  }
+                }
+            }
+
+
+        cout << "Products sorted by price in  ascending order" << endl;
+        for (int i = 0; i < Totalproducts; i++)
+         {
+           DisplayProduct(i);
+        }
+     }
+        
+        void SearchInInventory(int Totalproducts)
+        {
+            string Productname;
+            cout << " Enter Product Name To Be Searched " << endl;
+            cin >> Productname;
+            int Found = -1;
+            for(int i =0; i < Totalproducts;i++)
+            {
+                if(Productname == product[i].GetName())
+                {    
+                    DisplayProduct(i);
+                    Found = 1;
+                    break;
+                }
+            }
+            if (Found != 1)
+            {
+                cout << " Sorry But Product Not Found " << endl;
+            }
+        }
+    
+
+
+    ~Inventory()
+    { 
+        delete [] product;
+    }
+
+};
+
+int main()
+{
+    int Totalproducts;
+    cout << " Enter Total Products In Inventory " << endl;
+    cin >> Totalproducts;
+    string InventoryName;
+    cout << " Enter Inventory Name is " << endl;
+    cin.ignore();
+    getline(cin,InventoryName);
+    Inventory inventory(InventoryName,Totalproducts);
+    inventory.AddProductinInventory(Totalproducts);
+    inventory.SearchInInventory(Totalproducts);
+    inventory.Sort(Totalproducts);
+
+    return 0;
+}
