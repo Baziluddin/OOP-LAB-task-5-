@@ -1,0 +1,50 @@
+//24k-0559 bazil-uddin-khan
+#include<iostream>
+using namespace std;
+
+class Car
+{
+    string Registerationnumber;
+    string ModelName;
+    string  OwnerName;
+
+    public:
+    Car()
+    {
+        Registerationnumber = " ";
+        ModelName = " ";
+        OwnerName = " ";
+       
+    }
+
+    Car(string regisnum, string modelname, string ownername)
+    {
+        Registerationnumber = regisnum;
+        ModelName = modelname;
+        OwnerName = ownername;
+
+    }
+    
+
+    void  Dispaly()
+    {
+        cout << "Registeration number is " << Registerationnumber << " " << " MOdel name is " <<  ModelName << " " << " owner nameis " << OwnerName << endl;
+
+    }
+    
+    void SetOwnerName(string Name)
+    {
+       OwnerName = Name;
+    }
+
+
+};
+
+int main()
+{
+   Car car1("1234k","ty65","ALi");
+   car1.Dispaly();
+   Car car2(car1);
+   car2.SetOwnerName("Qasim");
+   car2.Dispaly();
+}
